@@ -45,11 +45,11 @@ extension MASegmentedControl {
     //MARK: TRANSLATION OF THUMBVIEW WITH ANIMATION ON TAP
     
     //Movement of thumbview if fillEqually = true
-    private func moveThumbView(at index: Int) {
+    internal func moveThumbView(at index: Int) {
         
-        let selectedStartPosition = index == 0 ? self.padding : bounds.width / CGFloat(buttons.count) *  CGFloat(index) + self.padding
         UIView.animate(withDuration: TimeInterval(self.animationDuration), animations: {
-            self.thumbView.frame.origin.x = selectedStartPosition
+            let button = self.buttons[index]
+            self.thumbView.center.x = button.center.x
         })
     }
     

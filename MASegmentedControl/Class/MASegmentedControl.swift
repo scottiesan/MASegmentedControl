@@ -16,11 +16,11 @@ public class MASegmentedControl: UIControl {
     //static properties
     //Set to 10 by default, if setted to 0 the image will be same size at button
     static let imageInsets: UIEdgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
-    static let bottomLineThumbViewHeight: CGFloat = 5.0
+    static let bottomLineThumbViewHeight: CGFloat = 2.0
     
     //Private UI properties
-    internal var buttons = [UIButton]()
-    internal var thumbView: UIView = {
+    public var buttons = [UIButton]()
+    public var thumbView: UIView = {
         return UIView()
     }()
         
@@ -47,7 +47,11 @@ public class MASegmentedControl: UIControl {
     //change this public properties for customization
     
     //MARK: APPEREANCE
-    public var selectedSegmentIndex = 0
+    public var selectedSegmentIndex = 0 {
+        didSet {
+            moveThumbView(at: selectedSegmentIndex)
+        }
+    }
 
     @IBInspectable public var padding: CGFloat = 0 {
         didSet {
@@ -61,7 +65,7 @@ public class MASegmentedControl: UIControl {
         }
     }
     
-    @IBInspectable public var customBorderColor: UIColor = .clear {
+    @IBInspectable public var customBorderColor: UIColor = .black {
         didSet {
             layer.borderColor = customBorderColor.cgColor
         }
@@ -84,6 +88,12 @@ public class MASegmentedControl: UIControl {
     
     //thumbView
     @IBInspectable public var thumbViewColor: UIColor = .darkGray {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var thumViewBorderColor: UIColor = .lightGray {
         didSet {
             updateView()
         }
@@ -155,6 +165,12 @@ public class MASegmentedControl: UIControl {
     }
     
     public var bottomLineThumbView: Bool = false {
+        didSet {
+            self.updateView()
+        }
+    }
+    
+    public var bottomLineThumViewWidth: CGFloat = 0 {
         didSet {
             self.updateView()
         }
@@ -245,8 +261,10 @@ public class MASegmentedControl: UIControl {
         
         layer.cornerRadius = roundedControl ? frame.height / 2 : 1.0
         self.backgroundColor = self.segmentedBackGroundColor
-        self.layer.borderColor = self.segmentedBackGroundColor.cgColor
         setThumbView()
+
+        self.layer.borderWidth = self.customBorderWidth
+        self.layer.borderColor = self.customBorderColor.cgColor
         //if fillEqually is not true the layout is not in stackview and its set based on frames
         guard !fillEqually else { return }
         for (index, btn) in self.buttons.enumerated() {
@@ -258,7 +276,12 @@ public class MASegmentedControl: UIControl {
     private func setThumbView() {
 
         let thumbViewHeight = bottomLineThumbView ? MASegmentedControl.bottomLineThumbViewHeight : bounds.height - padding * 2
-        let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : bounds.height - padding * 2
+        
+        var thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : bounds.height - padding * 2
+        if bottomLineThumViewWidth > 0 {
+            thumbViewWidth = bottomLineThumViewWidth
+        }
+        
         let thumbViewPositionX = padding
         let thumbViewPositionY = bottomLineThumbView ? bounds.height - thumbViewHeight - padding : (bounds.height - thumbViewHeight) / 2
         
@@ -307,7 +330,7 @@ public class MASegmentedControl: UIControl {
         //the remaining space of a selectorArea based on selector width
         let originXForNextItem = (thumbViewAreaTotalWidth - thumbView.bounds.width) / 2
         //dynamically change the origin x of the items between 0 and lastItem
-        let selectedStartPositionForNotEquallyFill = startingPointAtIndex + originXForNextItem 
+        let selectedStartPositionForNotEquallyFill = startingPointAtIndex + originXForNextItem
         
         if index == 0 {
             frame = CGRect(x: firstelementPositionX, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
@@ -325,7 +348,7 @@ public class MASegmentedControl: UIControl {
         guard self.buttonTitles.count != 0 else { return }
         
         for buttonTitle in buttonTitles {
-            let button = UIButton(type: .system)
+            let button = UIButton(type: .custom)
             button.setTitle(buttonTitle, for: .normal)
             button.titleLabel?.font = titlesFont
             button.setTitleColor(textColor, for: .normal)
@@ -375,5 +398,24 @@ public class MASegmentedControl: UIControl {
             buttons.append(button)
         }
     }
+    
+    
 }
 
+extension MASegmentedControl {
+    public func setAttributedTitle(title: NSAttributedString, for index: Int){
+        guard index < buttons.count else { return }
+        
+        let button = buttons[index] as UIButton
+        button.setAttributedTitle(title, for: .normal)
+        
+    }
+    
+    public func setTitle(title: String?, for index: Int){
+        guard index < buttons.count else { return }
+        
+        let button = buttons[index] as UIButton
+        button.setTitle(title, for: .normal)
+        
+    }
+}

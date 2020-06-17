@@ -286,6 +286,7 @@ public class MASegmentedControl: UIControl {
         let thumbViewPositionY = bottomLineThumbView ? bounds.height - thumbViewHeight - padding : (bounds.height - thumbViewHeight) / 2
         
         thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
+        thumbView.center.x = bounds.width / CGFloat(buttons.count * 2)
         thumbView.layer.cornerRadius = roundedControl ? thumbViewHeight / 2 : 1.0
         thumbView.backgroundColor = thumbViewColor
     }

@@ -46,8 +46,10 @@ extension MASegmentedControl {
     
     //Movement of thumbview if fillEqually = true
     internal func moveThumbView(at index: Int) {
-        
-        UIView.animate(withDuration: TimeInterval(self.animationDuration), animations: {
+        UIView.animate(withDuration: 0.3, animations: {
+            let button = self.buttons[index]
+            self.thumbView.center.x = button.center.x
+        }, completion: { _ in
             let button = self.buttons[index]
             self.thumbView.center.x = button.center.x
         })

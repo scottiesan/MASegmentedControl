@@ -19,7 +19,7 @@ public class MASegmentedControl: UIControl {
     static let bottomLineThumbViewHeight: CGFloat = 2.0
     
     //Private UI properties
-    public var buttons = [UIButton]()
+    public var buttons = [CustomButton]()
     public var thumbView: UIView = {
         return UIView()
     }()
@@ -349,7 +349,7 @@ public class MASegmentedControl: UIControl {
         guard self.buttonTitles.count != 0 else { return }
         
         for buttonTitle in buttonTitles {
-            let button = UIButton(type: .custom)
+            let button = CustomButton(type: .custom)
             button.setTitle(buttonTitle, for: .normal)
             button.titleLabel?.font = titlesFont
             button.setTitleColor(textColor, for: .normal)
@@ -367,12 +367,12 @@ public class MASegmentedControl: UIControl {
 
         for buttonImage in self.buttonImages {
             
-            var button: UIButton?
+            var button: CustomButton?
             if !buttonsWithDynamicImages {
-                button = UIButton(type: .system)
+                button = CustomButton(type: .system)
                 button?.tintColor = buttonColorForNormal
             } else {
-                button = UIButton(type: .custom)
+                button = CustomButton(type: .custom)
             }
             button?.setImage(buttonImage, for: .normal)
             button?.imageEdgeInsets = MASegmentedControl.imageInsets
@@ -389,7 +389,7 @@ public class MASegmentedControl: UIControl {
         
         guard self.buttonColors.count != 0 else { return }
         for btnColor in self.buttonColors {
-            let button = UIButton(type: .system)
+            let button = CustomButton(type: .system)
             button.tintColor = btnColor
             if let image = self.imageForItemWithDynamicColors {
                 button.setImage(image, for: .normal)

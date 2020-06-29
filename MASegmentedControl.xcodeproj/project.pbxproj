@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C7FD08124AA9BEE00E59BFA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7FD08024AA9BEE00E59BFA /* CustomButton.swift */; };
 		BBCD646C23B9D0DC00688D22 /* MASegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCD646223B9D0DB00688D22 /* MASegmentedControl.framework */; };
 		BBCD647123B9D0DC00688D22 /* MASegmentedControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCD647023B9D0DC00688D22 /* MASegmentedControlTests.swift */; };
 		BBCD647323B9D0DC00688D22 /* MASegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = BBCD646523B9D0DB00688D22 /* MASegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C7FD08024AA9BEE00E59BFA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		BBCD646223B9D0DB00688D22 /* MASegmentedControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MASegmentedControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBCD646523B9D0DB00688D22 /* MASegmentedControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASegmentedControl.h; sourceTree = "<group>"; };
 		BBCD646623B9D0DB00688D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				BBCD648723B9D16800688D22 /* MASegmentedControl.swift */,
 				BBCD64CA23B9D8ED00688D22 /* MASegmentedControl+actions.swift */,
+				5C7FD08024AA9BEE00E59BFA /* CustomButton.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			files = (
 				BBCD64CB23B9D8ED00688D22 /* MASegmentedControl+actions.swift in Sources */,
 				BBCD648823B9D16800688D22 /* MASegmentedControl.swift in Sources */,
+				5C7FD08124AA9BEE00E59BFA /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@ public class CustomButton: UIButton {
     private var isAnimating = false
     
     @IBInspectable
-    public var subTitle: String = "   " {
+    public var subTitle: String = "" {
         didSet {
             subTitleLabel.text = subTitle
             updateViews()
@@ -74,7 +74,6 @@ public class CustomButton: UIButton {
             subTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 0),
             subTitleLabel.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0)
         ])
-        
     }
     
     public func toggle() {
@@ -100,7 +99,6 @@ public class CustomButton: UIButton {
         }
         
         animator.addAnimations({
-            self.titleLabel?.alpha = 0.4
             self.subTitleLabel.alpha = 0
         }, delayFactor: 0.33)
         
@@ -114,7 +112,6 @@ public class CustomButton: UIButton {
             
             self.isAnimating = false
         }
-        
         animator.startAnimation()
     }
     
@@ -133,10 +130,6 @@ public class CustomButton: UIButton {
             self.subTitleLabel.center.x -= self.subTitleLabel.frame.width / 2
         }, delayFactor: 0)
         
-        animator.addAnimations({
-            self.titleLabel?.alpha = 1
-        }, delayFactor: 0.33)
-        
         animator.addCompletion { (position) in
             switch position {
             case .end:
@@ -147,10 +140,8 @@ public class CustomButton: UIButton {
             
             self.isAnimating = false
         }
-        
         animator.startAnimation()
     }
-    
 }
 
 extension String {
